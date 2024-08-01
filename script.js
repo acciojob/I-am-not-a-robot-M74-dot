@@ -48,9 +48,9 @@ function handleImageClick(img) {
     const imgClass = img.getAttribute('data-class');
 
     // Ignore double clicks on the same image
-    if (selectedImages.includes(img)) return;
+    if (selectedImages.includes(imgClass)) return;
 
-    selectedImages.push(img);
+    selectedImages.push(imgClass);
 
     // Show reset button
     resetButton.style.display = 'block';
@@ -62,11 +62,10 @@ function handleImageClick(img) {
 
     // Reset selection if more than 2 images are clicked
     if (selectedImages.length > 2) {
-        selectedImages = [img];
+        selectedImages = [imgClass];
         verifyButton.style.display = 'none';
     }
 }
-
 function handleReset() {
     renderImages();
 }
@@ -74,8 +73,8 @@ function handleReset() {
 function handleVerify() {
     if (selectedImages.length !== 2) return;
 
-    const imgClass1 = selectedImages[0].getAttribute('data-class');
-    const imgClass2 = selectedImages[1].getAttribute('data-class');
+    const imgClass1 = selectedImages[0];
+    const imgClass2 = selectedImages[1];
 
     verifyButton.style.display = 'none';
 
@@ -85,7 +84,6 @@ function handleVerify() {
         message.innerText = 'We can\'t verify you as a human. You selected the non-identical tiles.';
     }
 }
-
 // Event listeners
 resetButton.addEventListener('click', handleReset);
 verifyButton.addEventListener('click', handleVerify);
